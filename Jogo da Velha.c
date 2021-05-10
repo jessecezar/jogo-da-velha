@@ -15,10 +15,11 @@ void Tabuleiro(char casas2[9],char jogador1[20],char jogador2[20], int p1, int p
 
 int main(){
     system("cls");
+    setlocale(LC_ALL,"Portuguese");
 
     char casas[9] = {'1', '2', '3', '4', '5', '6', '7', '8', '9'};
     char jogador_X[20], jogador_O[20];
-    int cont_jogadas, resposta, jogada, vez = 0, i, pontos_X = 0, pontos_O = 0;
+    int cont_jogadas, resposta, jogada, vez = 0, i, pontos_X = 0, pontos_O = 0, X = 0, O = 0;
 
     printf("Informe o nome do primeiro jogador: ");
     fflush(stdin);
@@ -78,15 +79,26 @@ int main(){
             
         } while (cont_jogadas <= 9);
         Tabuleiro(casas, jogador_X, jogador_O, pontos_X, pontos_O);
+        X = pontos_X;
+        O = pontos_O;
+
         if (cont_jogadas == 10){
             printf("\nJogo empatado");
         }else if (cont_jogadas == 11){
-            printf("\n%s Venceu!!!!", jogador_X);
+            printf("\n%s Venceu!!!!\n", jogador_X);
             pontos_X++;
         }else if (cont_jogadas == 12){
-            printf("\n%s Venceu!!!!", jogador_O);
+            printf("\n%s Venceu!!!!\n", jogador_O);
             pontos_O++;
         }
+
+        if (pontos_X > X){
+            vez = 0;
+        }
+        if (pontos_O > O){
+            vez = 1;
+        }
+
         printf("\nDeseja jogar novamente? [1- Sim  2- Não]\n");
         scanf("%d", &resposta);
     } while (resposta == 1);
